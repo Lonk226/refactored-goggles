@@ -15,6 +15,7 @@ var inching = false
 var shooting = false
 var can_go_on_ladder = false
 var up_state = false
+var is_grounded = true
 
 signal shoot_signal(pos: Vector2)
 
@@ -32,6 +33,7 @@ func _physics_process(delta: float) -> void:
 		up_on_ladder()
 		jumpcut()
 		inch()
+		land()
 		underwater_physics()
 		flip_the_sprite()
 		change_sprite()
@@ -130,10 +132,12 @@ func underwater_physics():
 
 func shoot():
 	if Input.is_action_just_pressed("B"):
-		shooting = true
-		shoot_signal.emit(global_position)
-		await get_tree().create_timer(0.8).timeout
-		shooting = false
+		if get_tree().get_nodes_in_group("Lemons").size() < 3:
+			$"Buster Shot".playing = true
+			shooting = true
+			shoot_signal.emit(global_position)
+			await get_tree().create_timer(0.8).timeout
+			shooting = false
 
 func change_sprite():
 	if shooting:
@@ -180,3 +184,8 @@ func up_on_ladder():
 		up_state = false
 	if not $RayCast2D4.is_colliding() and Global.on_ladder and updir == -1:
 		position.y -= 3
+
+func land():
+	if not is_grounded and is_on_floor():
+		$Land.playing = true
+	is_grounded = is_on_floor()

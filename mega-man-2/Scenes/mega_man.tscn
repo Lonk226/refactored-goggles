@@ -1,8 +1,10 @@
-[gd_scene load_steps=25 format=3 uid="uid://dikee6j6aylgu"]
+[gd_scene load_steps=27 format=3 uid="uid://dikee6j6aylgu"]
 
 [ext_resource type="Script" uid="uid://cb71wjwx0ewuv" path="res://Scripts/mega_man.gd" id="1_4mida"]
 [ext_resource type="Texture2D" uid="uid://e8dlqjo5sqlo" path="res://Assets/Player/Mega Man.png" id="1_r2agl"]
 [ext_resource type="PackedScene" uid="uid://by1701o7fhudc" path="res://Scenes/Menus/health_bar.tscn" id="3_wv04a"]
+[ext_resource type="AudioStream" uid="uid://cda8slrrreia7" path="res://Assets/SFX/buster.wav" id="4_ducvc"]
+[ext_resource type="AudioStream" uid="uid://buk3qe14yos4w" path="res://Assets/SFX/land.wav" id="5_vycl3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4mida"]
 atlas = ExtResource("1_r2agl")
@@ -264,3 +266,9 @@ collide_with_bodies = false
 
 [node name="Health Bar" parent="UI" instance=ExtResource("3_wv04a")]
 position = Vector2(28, 52)
+
+[node name="Buster Shot" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_ducvc")
+
+[node name="Land" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_vycl3")

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://355a3lnpcb2v"]
+[gd_scene load_steps=5 format=3 uid="uid://355a3lnpcb2v"]
 
 [ext_resource type="Texture2D" uid="uid://n628ipircsm0" path="res://icon.svg" id="1_oa6qo"]
 [ext_resource type="Script" uid="uid://dgnx81ea350e7" path="res://Scripts/enemy.gd" id="1_sdfya"]
+[ext_resource type="AudioStream" uid="uid://nfe5ep3dg6sv" path="res://Assets/SFX/enemy_hit.wav" id="3_v30fj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa6qo"]
 size = Vector2(32, 32)
@@ -21,5 +22,8 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_oa6qo")
+
+[node name="Hit Sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_v30fj")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]

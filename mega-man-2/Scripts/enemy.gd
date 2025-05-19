@@ -9,6 +9,7 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 
 func damage():
 	health -= 1
+	$"Hit Sound".playing = true
 	if health == 0:
 		die()
 
