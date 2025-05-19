@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://7we2opkjwy6t"]
+
+[ext_resource type="Script" uid="uid://b6s5utsgxxex0" path="res://Scripts/lemon.gd" id="1_8rlsj"]
+[ext_resource type="Texture2D" uid="uid://6enxvdp7e1ll" path="res://Assets/Player/Lemon.png" id="1_rf5yt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8rlsj"]
+size = Vector2(6, 4)
+
+[node name="Lemon" type="Area2D"]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_8rlsj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_rf5yt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_8rlsj")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

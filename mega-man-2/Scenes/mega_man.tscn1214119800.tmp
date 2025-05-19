@@ -1,0 +1,115 @@
+[gd_scene load_steps=13 format=3 uid="uid://dikee6j6aylgu"]
+
+[ext_resource type="Script" uid="uid://cb71wjwx0ewuv" path="res://Scripts/mega_man.gd" id="1_4mida"]
+[ext_resource type="Texture2D" uid="uid://cim4mkqefvn53" path="res://Assets/Player/Mega Man.png" id="1_r2agl"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4mida"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wv04a"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_usrwe"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r2agl"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ducvc"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vycl3"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e4lu3"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ducvc"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4mida")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wv04a")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_usrwe")
+}],
+"loop": true,
+"name": &"Inch",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r2agl")
+}],
+"loop": true,
+"name": &"Jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ducvc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vycl3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e4lu3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vycl3")
+}],
+"loop": true,
+"name": &"Walk",
+"speed": 10.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4mida"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4mida"]
+size = Vector2(0.9375, 1.25)
+
+[node name="Mega Man" type="CharacterBody2D" groups=["Player"]]
+script = ExtResource("1_4mida")
+
+[node name="NormalSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ducvc")
+animation = &"Walk"
+
+[node name="ShootSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_4mida")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+rotation = 3.14159
+scale = Vector2(16, 16)
+shape = SubResource("RectangleShape2D_4mida")

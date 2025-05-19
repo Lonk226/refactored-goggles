@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://d2berfsbca8ib"]
+
+[ext_resource type="Script" uid="uid://cbb55c2ygep1y" path="res://Scripts/ladder.gd" id="1_2g1wp"]
+[ext_resource type="Texture2D" uid="uid://dyu5pjreuifbd" path="res://Assets/Tiles/Ladder.png" id="1_u7j4s"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2g1wp"]
+size = Vector2(16, 16)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_2g1wp"]
+a = Vector2(-8, -1.5)
+b = Vector2(8, -1.5)
+
+[node name="Ladder" type="Area2D"]
+collision_layer = 4
+collision_mask = 4
+script = ExtResource("1_2g1wp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_u7j4s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_2g1wp")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, -6.5)
+shape = SubResource("SegmentShape2D_2g1wp")
+disabled = true
+one_way_collision = true
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(-8, -11)
+exclude_parent = false
+target_position = Vector2(16, 0)
+collision_mask = 4
+hit_from_inside = true
+collide_with_areas = true
+collide_with_bodies = false
+
+[node name="RayCast2D2" type="RayCast2D" parent="."]
+position = Vector2(-10, -13)
+target_position = Vector2(21, 0)
+collision_mask = 16
+hit_from_inside = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]
