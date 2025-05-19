@@ -1,10 +1,9 @@
 extends Node2D
 
-@export var health = 10 
+var health = 1
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Lemons"):
-		area.queue_free()
 		damage()
 
 func damage():
