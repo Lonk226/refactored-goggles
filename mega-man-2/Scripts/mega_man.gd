@@ -19,6 +19,9 @@ var is_grounded = true
 
 signal shoot_signal(pos: Vector2)
 
+func _ready() -> void:
+	Global.connect("enemy_hit", damage)
+
 func _physics_process(delta: float) -> void:
 	if not frozen:
 		var jump_speed: float = ((2 * jump_height) / jump_time_to_peak) * -1 # speed of jump
@@ -189,3 +192,6 @@ func land():
 	if not is_grounded and is_on_floor():
 		$Land.playing = true
 	is_grounded = is_on_floor()
+
+func damage():
+	print("what!")
