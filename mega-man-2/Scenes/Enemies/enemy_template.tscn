@@ -22,6 +22,8 @@ texture = ExtResource("1_oa6qo")
 stream = ExtResource("3_v30fj")
 
 [node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_j4reb")
