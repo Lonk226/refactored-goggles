@@ -5,7 +5,7 @@
 [ext_resource type="Resource" uid="uid://cy65rd8av0c0j" path="res://Resources/basic.tres" id="2_j4reb"]
 [ext_resource type="AudioStream" uid="uid://nfe5ep3dg6sv" path="res://Assets/SFX/enemy_hit.wav" id="3_v30fj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_oa6qo"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j4reb"]
 size = Vector2(32, 32)
 
 [node name="Enemy Template" type="Node2D"]
@@ -18,15 +18,13 @@ stats = ExtResource("2_j4reb")
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("1_oa6qo")
 
-[node name="Hurtbox" type="Area2D" parent="."]
-collision_layer = 2
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
-shape = SubResource("RectangleShape2D_oa6qo")
-
 [node name="Hit Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_v30fj")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_j4reb")
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

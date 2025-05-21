@@ -1,10 +1,14 @@
-[gd_scene load_steps=27 format=3 uid="uid://dikee6j6aylgu"]
+[gd_scene load_steps=29 format=3 uid="uid://dikee6j6aylgu"]
 
 [ext_resource type="Script" uid="uid://cb71wjwx0ewuv" path="res://Scripts/mega_man.gd" id="1_4mida"]
 [ext_resource type="Texture2D" uid="uid://e8dlqjo5sqlo" path="res://Assets/Player/Mega Man.png" id="1_r2agl"]
 [ext_resource type="PackedScene" uid="uid://by1701o7fhudc" path="res://Scenes/Menus/health_bar.tscn" id="3_wv04a"]
 [ext_resource type="AudioStream" uid="uid://cda8slrrreia7" path="res://Assets/SFX/buster.wav" id="4_ducvc"]
 [ext_resource type="AudioStream" uid="uid://buk3qe14yos4w" path="res://Assets/SFX/land.wav" id="5_vycl3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32ehx"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(0, 64, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4mida"]
 atlas = ExtResource("1_r2agl")
@@ -48,6 +52,14 @@ region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ducvc"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32ehx")
+}],
+"loop": true,
+"name": &"Damaged",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4mida")
@@ -127,6 +139,10 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_7cix0"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(0, 64, 64, 64)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_xg7gm"]
 atlas = ExtResource("1_r2agl")
 region = Rect2(64, 64, 64, 64)
@@ -161,6 +177,14 @@ region = Rect2(192, 64, 64, 64)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_4mida"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7cix0")
+}],
+"loop": true,
+"name": &"Damaged",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_xg7gm")
@@ -221,11 +245,11 @@ script = ExtResource("1_4mida")
 
 [node name="NormalSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ducvc")
-animation = &"Idle"
+animation = &"Damaged"
 
 [node name="ShootSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4mida")
-animation = &"Idle"
+animation = &"Damaged"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.26759e-06)

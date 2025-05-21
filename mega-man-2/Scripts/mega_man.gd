@@ -10,17 +10,21 @@ extends CharacterBody2D
 @export var jump_time_to_peak: float = 0.333 # length of jump
 @export var jump_time_to_descent: float = 0.333 # length of fall
 @export var max_fall_speed: float = 720
+@export var knockback = 150
+@export var air_knockback = 100
 var frozen = false
 var inching = false
 var shooting = false
 var can_go_on_ladder = false
 var up_state = false
 var is_grounded = true
+var damaged = false
+var movetry = 1
 
 signal shoot_signal(pos: Vector2)
 
 func _ready() -> void:
-	Global.connect("enemy_hit", damage)
+	Global.damage_player.connect(damage)
 
 func _physics_process(delta: float) -> void:
 	if not frozen:
@@ -45,7 +49,7 @@ func _physics_process(delta: float) -> void:
 
 func move():
 	var dir := Input.get_axis("Left", "Right")
-	if not Global.on_ladder:
+	if not Global.on_ladder and not damaged:
 		if dir:
 			if is_on_floor():
 				velocity.x = dir * walk_speed
@@ -62,7 +66,10 @@ func jump(jump_speed):
 
 func play_animation():
 	var dir := Input.get_axis("Left", "Right")
-	if not is_on_floor():
+	if damaged:
+		normal_sprite.play("Damaged")
+		shoot_sprite.play("Damaged")
+	elif not is_on_floor():
 		if Global.on_ladder:
 			if up_state:
 				normal_sprite.play("Up")
@@ -91,16 +98,20 @@ func play_animation():
 func flip_the_sprite():
 	var dir := Input.get_axis("Left", "Right")
 	if dir == 1:
-		normal_sprite.flip_h = false
-		shoot_sprite.flip_h = false
 		Global.facing_right = true
 	if dir == -1:
+		Global.facing_right = false
+	if Global.facing_right:
+		normal_sprite.flip_h = false
+		shoot_sprite.flip_h = false
+		movetry = 1
+	if not Global.facing_right:
 		normal_sprite.flip_h = true
 		shoot_sprite.flip_h = true
-		Global.facing_right = false
+		movetry = -1
 
 func gravity(delta, jump_gravity, fall_gravity):
-	if not Global.on_ladder:
+	if not Global.on_ladder and not damaged:
 		if not is_on_floor():
 			velocity.y += getgravity(jump_gravity, fall_gravity) * delta
 			if velocity.y > max_fall_speed:
@@ -194,4 +205,14 @@ func land():
 	is_grounded = is_on_floor()
 
 func damage():
-	print("what!")
+	if not Global.player_invincible:
+		if is_on_floor():
+			velocity.x += knockback * -movetry
+		elif not is_on_floor():
+			velocity.x += air_knockback * -movetry
+		damaged = true
+		Global.player_invincible = true
+		await get_tree().create_timer(0.2).timeout
+		damaged = false
+		await get_tree().create_timer(1).timeout
+		Global.player_invincible = false
