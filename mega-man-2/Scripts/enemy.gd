@@ -1,7 +1,6 @@
 extends Node2D
 
-@export var health = 10 
-@export var damage = 3
+@export var stats: Resource
 
 func _on_hurtbox_area_entered(area: Area2D) -> void:
 	if area.is_in_group("Lemons"):
@@ -9,9 +8,9 @@ func _on_hurtbox_area_entered(area: Area2D) -> void:
 		hit()
 
 func hit():
-	health -= 1
+	stats.hp -= 1
 	$"Hit Sound".playing = true
-	if health == 0:
+	if stats.hp == 0:
 		die()
 
 func die():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://355a3lnpcb2v"]
+[gd_scene load_steps=6 format=3 uid="uid://355a3lnpcb2v"]
 
 [ext_resource type="Texture2D" uid="uid://n628ipircsm0" path="res://icon.svg" id="1_oa6qo"]
 [ext_resource type="Script" uid="uid://dgnx81ea350e7" path="res://Scripts/enemy.gd" id="1_sdfya"]
+[ext_resource type="Resource" uid="uid://cy65rd8av0c0j" path="res://Resources/basic.tres" id="2_j4reb"]
 [ext_resource type="AudioStream" uid="uid://nfe5ep3dg6sv" path="res://Assets/SFX/enemy_hit.wav" id="3_v30fj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oa6qo"]
@@ -9,6 +10,7 @@ size = Vector2(32, 32)
 
 [node name="Enemy Template" type="Node2D"]
 script = ExtResource("1_sdfya")
+stats = ExtResource("2_j4reb")
 
 [node name="Pattern" type="Node2D" parent="."]
 
