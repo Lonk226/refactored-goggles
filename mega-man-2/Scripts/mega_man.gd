@@ -10,8 +10,7 @@ extends CharacterBody2D
 @export var jump_time_to_peak: float = 0.333 # length of jump
 @export var jump_time_to_descent: float = 0.333 # length of fall
 @export var max_fall_speed: float = 720
-@export var knockback = 150
-@export var air_knockback = 100
+@export var knockback = 100
 var frozen = false
 var inching = false
 var shooting = false
@@ -206,13 +205,11 @@ func land():
 
 func damage():
 	if not Global.player_invincible:
-		if is_on_floor():
-			velocity.x += knockback * -movetry
-		elif not is_on_floor():
-			velocity.x += air_knockback * -movetry
+		velocity.x += knockback * -movetry
+		velocity.y = 0
 		damaged = true
 		Global.player_invincible = true
-		await get_tree().create_timer(0.2).timeout
+		await get_tree().create_timer(0.4).timeout
 		damaged = false
 		await get_tree().create_timer(1).timeout
 		Global.player_invincible = false

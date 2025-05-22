@@ -14,7 +14,7 @@ config/name="Mega Man 2"
 run/main_scene="uid://fllx6arogyd2"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
-config/icon="res://icon.svg"
+config/icon="res://Assets/Enemies/icon.svg"
 
 [autoload]
 

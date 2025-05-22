@@ -1,9 +1,72 @@
-[gd_scene load_steps=6 format=3 uid="uid://355a3lnpcb2v"]
+[gd_scene load_steps=15 format=3 uid="uid://355a3lnpcb2v"]
 
-[ext_resource type="Texture2D" uid="uid://n628ipircsm0" path="res://icon.svg" id="1_oa6qo"]
+[ext_resource type="Texture2D" uid="uid://n628ipircsm0" path="res://Assets/Enemies/icon.svg" id="1_oa6qo"]
 [ext_resource type="Script" uid="uid://dgnx81ea350e7" path="res://Scripts/enemy.gd" id="1_sdfya"]
 [ext_resource type="Resource" uid="uid://cy65rd8av0c0j" path="res://Resources/basic.tres" id="2_j4reb"]
+[ext_resource type="Texture2D" uid="uid://l3wyk2xqiqfw" path="res://Assets/Enemies/Enemy Death.png" id="3_t0jbf"]
 [ext_resource type="AudioStream" uid="uid://nfe5ep3dg6sv" path="res://Assets/SFX/enemy_hit.wav" id="3_v30fj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbljs"]
+atlas = ExtResource("3_t0jbf")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_654j3"]
+atlas = ExtResource("3_t0jbf")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i5vkn"]
+atlas = ExtResource("3_t0jbf")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wbfjv"]
+atlas = ExtResource("3_t0jbf")
+region = Rect2(0, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_748ib"]
+atlas = ExtResource("3_t0jbf")
+region = Rect2(48, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xgix2"]
+atlas = ExtResource("3_t0jbf")
+region = Rect2(96, 48, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4reb"]
+atlas = ExtResource("1_oa6qo")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_t0jbf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbljs")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_654j3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i5vkn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wbfjv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_748ib")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xgix2")
+}],
+"loop": false,
+"name": &"Death",
+"speed": 18.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j4reb")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j4reb"]
 size = Vector2(32, 32)
@@ -14,19 +77,23 @@ stats = ExtResource("2_j4reb")
 
 [node name="Pattern" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Pattern"]
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_oa6qo")
+sprite_frames = SubResource("SpriteFrames_t0jbf")
+animation = &"Death"
+autoplay = "Idle"
+frame = 5
+frame_progress = 1.0
 
-[node name="Hit Sound" type="AudioStreamPlayer2D" parent="."]
+[node name="Hit Sound" type="AudioStreamPlayer2D" parent="Pattern"]
 stream = ExtResource("3_v30fj")
 
-[node name="Hurtbox" type="Area2D" parent="."]
+[node name="Hurtbox" type="Area2D" parent="Pattern"]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pattern/Hurtbox"]
 shape = SubResource("RectangleShape2D_j4reb")
 
-[connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
-[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="area_entered" from="Pattern/Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Pattern/Hurtbox" to="." method="_on_hurtbox_body_entered"]
