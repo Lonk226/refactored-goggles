@@ -43,6 +43,7 @@ func _physics_process(delta: float) -> void:
 		underwater_physics()
 		flip_the_sprite()
 		change_sprite()
+		change_palette()
 		move_and_slide()
 	play_animation()
 
@@ -213,3 +214,6 @@ func damage():
 		damaged = false
 		await get_tree().create_timer(1).timeout
 		Global.player_invincible = false
+
+func change_palette():
+	pass
