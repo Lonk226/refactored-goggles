@@ -6,6 +6,8 @@ extends Node2D
 
 var dead = false
 
+signal death()
+
 func hit():
 	health -= 1
 	$"Pattern/Hit Sound".playing = true
@@ -14,7 +16,8 @@ func hit():
 
 func die():
 	dead = true
-	$Pattern/AnimatedSprite2D.play("Death")
+	death.emit()
+	$"Pattern/Death Effect".play("Death")
 	await get_tree().create_timer(0.33333).timeout
 	queue_free()
 

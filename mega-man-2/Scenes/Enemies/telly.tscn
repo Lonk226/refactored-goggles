@@ -1,0 +1,76 @@
+[gd_scene load_steps=13 format=3 uid="uid://bmjjkxs8xvl7m"]
+
+[ext_resource type="PackedScene" uid="uid://355a3lnpcb2v" path="res://Scenes/Enemies/enemy_template.tscn" id="1_pl2oe"]
+[ext_resource type="Resource" uid="uid://cy65rd8av0c0j" path="res://Resources/telly.tres" id="2_flnl8"]
+[ext_resource type="Script" uid="uid://bb5njaxq6l7ok" path="res://Scenes/Enemies/telly.gd" id="2_qegw7"]
+[ext_resource type="Texture2D" uid="uid://bguf2hkfnt3e" path="res://Assets/Enemies/Telly.png" id="2_rf42n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qegw7"]
+atlas = ExtResource("2_rf42n")
+region = Rect2(0, 0, 17, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_flnl8"]
+atlas = ExtResource("2_rf42n")
+region = Rect2(17, 0, 17, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ub0l5"]
+atlas = ExtResource("2_rf42n")
+region = Rect2(34, 0, 17, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqjga"]
+atlas = ExtResource("2_rf42n")
+region = Rect2(51, 0, 17, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ym1jb"]
+atlas = ExtResource("2_rf42n")
+region = Rect2(68, 0, 17, 30)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fm524"]
+atlas = ExtResource("2_rf42n")
+region = Rect2(85, 0, 17, 30)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pl2oe"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qegw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_flnl8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ub0l5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iqjga")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ym1jb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fm524")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rf42n"]
+size = Vector2(16.5, 16)
+
+[node name="Telly" instance=ExtResource("1_pl2oe")]
+stats = ExtResource("2_flnl8")
+
+[node name="Pattern" parent="." index="0"]
+script = ExtResource("2_qegw7")
+
+[node name="Normal" type="AnimatedSprite2D" parent="Pattern" index="0"]
+sprite_frames = SubResource("SpriteFrames_pl2oe")
+autoplay = "default"
+frame_progress = 0.639037
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pattern/Hurtbox" index="0"]
+position = Vector2(-0.25, 0)
+shape = SubResource("RectangleShape2D_rf42n")
+
+[connection signal="death" from="." to="Pattern" method="_on_telly_death"]

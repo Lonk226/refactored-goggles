@@ -44,6 +44,7 @@ func _physics_process(delta: float) -> void:
 		flip_the_sprite()
 		change_sprite()
 		change_palette()
+		iframes()
 		move_and_slide()
 	play_animation()
 
@@ -217,3 +218,11 @@ func damage():
 
 func change_palette():
 	pass
+
+func iframes():
+	if Global.player_invincible:
+		normal_sprite.modulate = Color(1.0, 1.0, 1.0, 0.533)
+		shoot_sprite.modulate = Color(1.0, 1.0, 1.0, 0.533)
+	else:
+		normal_sprite.modulate = Color.WHITE
+		shoot_sprite.modulate = Color.WHITE
