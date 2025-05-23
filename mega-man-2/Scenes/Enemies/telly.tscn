@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://355a3lnpcb2v" path="res://Scenes/Enemies/enemy_template.tscn" id="1_pl2oe"]
 [ext_resource type="Resource" uid="uid://cy65rd8av0c0j" path="res://Resources/telly.tres" id="2_flnl8"]
-[ext_resource type="Script" uid="uid://bb5njaxq6l7ok" path="res://Scenes/Enemies/telly.gd" id="2_qegw7"]
+[ext_resource type="Script" uid="uid://bb5njaxq6l7ok" path="res://Scripts/telly.gd" id="2_qegw7"]
 [ext_resource type="Texture2D" uid="uid://bguf2hkfnt3e" path="res://Assets/Enemies/Telly.png" id="2_rf42n"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qegw7"]
