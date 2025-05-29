@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=4 uid="uid://fllx6arogyd2"]
+[gd_scene load_steps=18 format=4 uid="uid://fllx6arogyd2"]
 
 [ext_resource type="Texture2D" uid="uid://bclrvvl08gpmc" path="res://Assets/Tiles/Metal Man Tiles.png" id="1_5a1yd"]
 [ext_resource type="Script" uid="uid://bv1a3uuot2ran" path="res://Scripts/level.gd" id="1_ebu0d"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d2berfsbca8ib" path="res://Scenes/Objects/ladder.tscn" id="2_yhrl8"]
 [ext_resource type="PackedScene" uid="uid://bmjjkxs8xvl7m" path="res://Scenes/Enemies/telly.tscn" id="4_6epvh"]
 [ext_resource type="Script" uid="uid://ctp7wug8nsge3" path="res://Scripts/camera.gd" id="4_yhrl8"]
+[ext_resource type="PackedScene" uid="uid://8ltn27srymly" path="res://Scenes/Enemies/met.tscn" id="8_ert0c"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wks4m"]
 texture = ExtResource("1_5a1yd")
@@ -118,8 +119,8 @@ resource_name = "Ladders"
 scenes/1/scene = ExtResource("2_yhrl8")
 
 [sub_resource type="TileSet" id="TileSet_gwi3t"]
-physics_layer_0/collision_layer = 16
-physics_layer_0/collision_mask = 16
+physics_layer_0/collision_layer = 17
+physics_layer_0/collision_mask = 17
 sources/1 = SubResource("TileSetAtlasSource_wks4m")
 sources/2 = SubResource("TileSetScenesCollectionSource_ebu0d")
 
@@ -225,7 +226,6 @@ tile_map_data = PackedByteArray("AADy//r/AAACAAAAAADV//r/AAACAAAAAADW//r/AAACAAE
 tile_set = SubResource("TileSet_aibml")
 
 [node name="Objects and Enemies" type="TileMapLayer" parent="Tiles"]
-tile_map_data = PackedByteArray("AAADAP3/AAAAAAAAAgAGAPr/AAAAAAAAAgAHAP3/AAAAAAAAAgD+//n/AAAAAAAAAgADAPf/AAAAAAAAAgD5//j/AAAAAAAAAgA=")
 tile_set = SubResource("TileSet_tvne3")
 
 [node name="TileTimer" type="Timer" parent="Tiles"]
@@ -252,6 +252,14 @@ shape = SubResource("WorldBoundaryShape2D_yhrl8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Camera2D/CameraMoveDown"]
 position = Vector2(0, 6)
 shape = SubResource("WorldBoundaryShape2D_ebu0d")
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Met" parent="Enemies" instance=ExtResource("8_ert0c")]
+position = Vector2(113, -4)
+
+[node name="Met2" parent="Enemies" instance=ExtResource("8_ert0c")]
+position = Vector2(92, -4)
 
 [connection signal="timeout" from="Tiles/TileTimer" to="." method="_on_tile_timer_timeout"]
 [connection signal="shoot_signal" from="Mega Man" to="." method="_on_mega_man_shoot_signal"]

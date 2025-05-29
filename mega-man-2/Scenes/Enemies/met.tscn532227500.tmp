@@ -1,0 +1,93 @@
+[gd_scene load_steps=13 format=3 uid="uid://8ltn27srymly"]
+
+[ext_resource type="PackedScene" uid="uid://355a3lnpcb2v" path="res://Scenes/Enemies/enemy_template.tscn" id="1_2e6bb"]
+[ext_resource type="Script" uid="uid://dlhqcg324wni4" path="res://Scripts/Enemy AI/met.gd" id="2_1pujd"]
+[ext_resource type="Texture2D" uid="uid://crdodo6a1x5er" path="res://Assets/Enemies/Met.png" id="2_4j6d0"]
+[ext_resource type="Resource" uid="uid://db0mhqsalbiq3" path="res://Resources/met.tres" id="2_4ljox"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pujd"]
+atlas = ExtResource("2_4j6d0")
+region = Rect2(0, 0, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ljox"]
+atlas = ExtResource("2_4j6d0")
+region = Rect2(0, 200, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0nwh7"]
+atlas = ExtResource("2_4j6d0")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rk256"]
+atlas = ExtResource("2_4j6d0")
+region = Rect2(0, 400, 200, 200)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c5a7r"]
+atlas = ExtResource("2_4j6d0")
+region = Rect2(0, 600, 200, 200)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2e6bb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pujd")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ljox")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0nwh7")
+}],
+"loop": false,
+"name": &"Lift",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rk256")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c5a7r")
+}],
+"loop": true,
+"name": &"Run",
+"speed": 10.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4j6d0"]
+size = Vector2(14, 11)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4ljox"]
+radius = 89.0898
+
+[node name="Met" instance=ExtResource("1_2e6bb")]
+stats = ExtResource("2_4ljox")
+
+[node name="Pattern" parent="." index="0"]
+script = ExtResource("2_1pujd")
+
+[node name="Normal" type="AnimatedSprite2D" parent="Pattern" index="0"]
+sprite_frames = SubResource("SpriteFrames_2e6bb")
+animation = &"Idle"
+autoplay = "Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pattern/Hurtbox" index="0"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_4j6d0")
+
+[node name="Detection Area" type="Area2D" parent="Pattern" index="5"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Pattern/Detection Area" index="0"]
+shape = SubResource("CircleShape2D_4ljox")
+
+[node name="Timer" type="Timer" parent="Pattern" index="6"]
+wait_time = 3.0
+
+[connection signal="death" from="." to="Pattern" method="_on_met_death"]
+[connection signal="body_entered" from="Pattern/Detection Area" to="Pattern" method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="Pattern/Detection Area" to="Pattern" method="_on_detection_area_body_exited"]
+[connection signal="timeout" from="Pattern/Timer" to="Pattern" method="_on_timer_timeout"]

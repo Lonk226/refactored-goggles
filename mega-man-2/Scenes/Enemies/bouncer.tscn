@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cy18k3jvlcug"]
+
+[ext_resource type="Script" uid="uid://dwsgbfudhpu8x" path="res://Scripts/bouncer.gd" id="1_tuff3"]
+[ext_resource type="AudioStream" uid="uid://c5uu6o6mbcuml" path="res://Assets/SFX/dink.wav" id="2_v4ebe"]
+
+[node name="Bouncer" type="Area2D"]
+collision_layer = 34
+collision_mask = 34
+script = ExtResource("1_tuff3")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_v4ebe")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

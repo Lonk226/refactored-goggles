@@ -1,6 +1,6 @@
 extends Node2D
 
-var speed = 80
+var speed = 300
 
 func _on_telly_death() -> void:
 	$Normal.visible = false

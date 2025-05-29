@@ -10,7 +10,7 @@ extends CharacterBody2D
 @export var jump_time_to_peak: float = 0.333 # length of jump
 @export var jump_time_to_descent: float = 0.333 # length of fall
 @export var max_fall_speed: float = 720
-@export var knockback = 100
+@export var knockback = 50
 var frozen = false
 var inching = false
 var shooting = false
@@ -19,11 +19,35 @@ var up_state = false
 var is_grounded = true
 var damaged = false
 var movetry = 1
+var dead = false
 
 signal shoot_signal(pos: Vector2)
 
+# death animation sprites
+@onready var deathanim1: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D"
+@onready var deathanim2: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D2"
+@onready var deathanim3: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D3"
+@onready var deathanim4: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D4"
+@onready var deathanim5: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D5"
+@onready var deathanim6: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D6"
+@onready var deathanim7: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D7"
+@onready var deathanim8: AnimatedSprite2D = $"Death Animation/AnimatedSprite2D8"
+
+
 func _ready() -> void:
 	Global.damage_player.connect(damage)
+	Global.mega_man_health = 28
+	Global.player_invincible = false
+	$"Death Animation".visible = false
+	frozen = false
+	inching = false
+	shooting = false
+	can_go_on_ladder = false
+	up_state = false
+	is_grounded = true
+	damaged = false
+	movetry = 1
+	dead = false
 
 func _physics_process(delta: float) -> void:
 	if not frozen:
@@ -47,6 +71,8 @@ func _physics_process(delta: float) -> void:
 		iframes()
 		move_and_slide()
 	play_animation()
+	die()
+	$UI/Label.text = str(Engine.get_frames_per_second()) + " FPS"
 
 func move():
 	var dir := Input.get_axis("Left", "Right")
@@ -155,12 +181,13 @@ func shoot():
 			shooting = false
 
 func change_sprite():
-	if shooting:
-		normal_sprite.visible = false
-		shoot_sprite.visible = true
-	else:
-		normal_sprite.visible = true
-		shoot_sprite.visible = false
+	if not dead:
+		if shooting:
+			normal_sprite.visible = false
+			shoot_sprite.visible = true
+		else:
+			normal_sprite.visible = true
+			shoot_sprite.visible = false
 
 func climb():
 	var updir = Input.get_axis("Up","Down")
@@ -211,7 +238,7 @@ func damage():
 		velocity.y = 0
 		damaged = true
 		Global.player_invincible = true
-		await get_tree().create_timer(0.4).timeout
+		await get_tree().create_timer(0.2).timeout
 		damaged = false
 		await get_tree().create_timer(1).timeout
 		Global.player_invincible = false
@@ -226,3 +253,21 @@ func iframes():
 	else:
 		normal_sprite.modulate = Color.WHITE
 		shoot_sprite.modulate = Color.WHITE
+
+func die():
+	if Global.mega_man_health <= 0:
+		Global.player_death.emit()
+		frozen = true
+		dead = true
+		deathanim()
+		normal_sprite.visible = false
+		shoot_sprite.visible = false
+
+func deathanim():
+	$"UI/Health Bar".visible = false
+	$"Death Animation/AnimationPlayer".play("Death")
+	await get_tree().create_timer(3).timeout
+	$"Death Animation/AnimationPlayer".stop()
+	$"Death Animation".visible = false
+	get_tree().change_scene_to_file("res://Scenes/Levels/level_template.tscn")
+	

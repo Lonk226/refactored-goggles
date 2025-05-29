@@ -1,10 +1,11 @@
-[gd_scene load_steps=29 format=3 uid="uid://dikee6j6aylgu"]
+[gd_scene load_steps=38 format=3 uid="uid://dikee6j6aylgu"]
 
 [ext_resource type="Script" uid="uid://cb71wjwx0ewuv" path="res://Scripts/mega_man.gd" id="1_4mida"]
 [ext_resource type="Texture2D" uid="uid://e8dlqjo5sqlo" path="res://Assets/Player/Mega Man.png" id="1_r2agl"]
 [ext_resource type="PackedScene" uid="uid://by1701o7fhudc" path="res://Scenes/Menus/health_bar.tscn" id="3_wv04a"]
 [ext_resource type="AudioStream" uid="uid://cda8slrrreia7" path="res://Assets/SFX/buster.wav" id="4_ducvc"]
 [ext_resource type="AudioStream" uid="uid://buk3qe14yos4w" path="res://Assets/SFX/land.wav" id="5_vycl3"]
+[ext_resource type="AudioStream" uid="uid://hrm55tk0ee1k" path="res://Assets/SFX/death.wav" id="6_e4lu3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_32ehx"]
 atlas = ExtResource("1_r2agl")
@@ -238,6 +239,295 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4mida"]
 size = Vector2(0.875, 1.25)
 
+[sub_resource type="Animation" id="Animation_vycl3"]
+resource_name = "Death"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(200, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-200, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 200)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -200)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimatedSprite2D5:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(140, 140)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AnimatedSprite2D6:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-140, -140)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimatedSprite2D7:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-140, 140)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AnimatedSprite2D8:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(140, -140)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Death Sound:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_e4lu3"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(100, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D2:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-100, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AnimatedSprite2D3:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 100)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimatedSprite2D4:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -100)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AnimatedSprite2D5:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(70, 70)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AnimatedSprite2D6:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-70, -70)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimatedSprite2D7:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-70, 70)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AnimatedSprite2D8:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(70, -70)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Death Sound:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_usrwe"]
+_data = {
+&"Death": SubResource("Animation_vycl3"),
+&"RESET": SubResource("Animation_e4lu3")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_32iok"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(320, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pwp3"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(384, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tr2ni"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(448, 128, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_e8w2k"]
+atlas = ExtResource("1_r2agl")
+region = Rect2(512, 128, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_65ojo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_32iok")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pwp3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tr2ni")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_e8w2k")
+}],
+"loop": true,
+"name": &"default",
+"speed": 20.0
+}]
+
 [node name="Mega Man" type="CharacterBody2D" groups=["Player"]]
 collision_layer = 17
 collision_mask = 17
@@ -245,11 +535,11 @@ script = ExtResource("1_4mida")
 
 [node name="NormalSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ducvc")
-animation = &"Damaged"
+animation = &"Idle"
 
 [node name="ShootSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4mida")
-animation = &"Damaged"
+animation = &"Idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.26759e-06)
@@ -291,8 +581,74 @@ collide_with_bodies = false
 [node name="Health Bar" parent="UI" instance=ExtResource("3_wv04a")]
 position = Vector2(28, 52)
 
+[node name="Label" type="Label" parent="UI"]
+offset_left = 41.0
+offset_top = 24.0
+offset_right = 81.0
+offset_bottom = 47.0
+
 [node name="Buster Shot" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("4_ducvc")
 
 [node name="Land" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_vycl3")
+
+[node name="Death Animation" type="Node2D" parent="."]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Death Animation"]
+libraries = {
+&"": SubResource("AnimationLibrary_usrwe")
+}
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(100, 0)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.88175
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(-100, 0)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.546743
+
+[node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(0, 100)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.546743
+
+[node name="AnimatedSprite2D4" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(0, -100)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.546743
+
+[node name="AnimatedSprite2D5" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(70, 70)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.546743
+
+[node name="AnimatedSprite2D6" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(-70, -70)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.546743
+
+[node name="AnimatedSprite2D7" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(-70, 70)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.546743
+
+[node name="AnimatedSprite2D8" type="AnimatedSprite2D" parent="Death Animation"]
+position = Vector2(70, -70)
+sprite_frames = SubResource("SpriteFrames_65ojo")
+autoplay = "default"
+frame_progress = 0.546743
+
+[node name="Death Sound" type="AudioStreamPlayer2D" parent="Death Animation"]
+stream = ExtResource("6_e4lu3")
+
+[connection signal="animation_changed" from="Death Animation/AnimationPlayer" to="." method="_on_animation_player_animation_changed"]
