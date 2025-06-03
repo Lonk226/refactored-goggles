@@ -2,6 +2,7 @@ extends Marker2D
 
 @export var enemy_scene: PackedScene
 
+
 func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
 	spawn()
 

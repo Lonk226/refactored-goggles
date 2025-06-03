@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Mega Man 2"
-run/main_scene="uid://fllx6arogyd2"
+run/main_scene="uid://be2q2m5dvjn0u"
 config/features=PackedStringArray("4.4", "GL Compatibility")
 run/max_fps=60
 config/icon="res://Assets/Enemies/icon.svg"
@@ -31,6 +31,7 @@ window/stretch/mode="viewport"
 
 Player=""
 Lemons=""
+Enemy=""
 
 [input]
 
@@ -83,6 +84,7 @@ Select={
 2d_physics/layer_4="Water"
 2d_physics/layer_5="Player"
 2d_physics/layer_6="Bouncer"
+2d_physics/layer_7="Camera"
 
 [rendering]
 

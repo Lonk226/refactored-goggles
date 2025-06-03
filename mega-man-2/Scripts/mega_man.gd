@@ -269,5 +269,4 @@ func deathanim():
 	await get_tree().create_timer(3).timeout
 	$"Death Animation/AnimationPlayer".stop()
 	$"Death Animation".visible = false
-	get_tree().change_scene_to_file("res://Scenes/Levels/level_template.tscn")
-	
+	get_tree().reload_current_scene()

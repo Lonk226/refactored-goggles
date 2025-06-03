@@ -536,10 +536,11 @@ script = ExtResource("1_4mida")
 [node name="NormalSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_ducvc")
 animation = &"Idle"
+frame_progress = 0.0945338
 
 [node name="ShootSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_4mida")
-animation = &"Idle"
+animation = &"Walk"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.26759e-06)

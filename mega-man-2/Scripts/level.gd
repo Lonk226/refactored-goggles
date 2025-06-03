@@ -6,6 +6,7 @@ var anim_on = true
 var lemon_scene = preload("res://Scenes/Projectiles/lemon.tscn")
 var shoot_dir
 
+
 func _on_tile_timer_timeout() -> void:
 	if anim_on == true:
 		anim_on = false

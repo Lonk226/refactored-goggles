@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://8ltn27srymly"]
+[gd_scene load_steps=13 format=3 uid="uid://8ltn27srymly"]
 
 [ext_resource type="PackedScene" uid="uid://355a3lnpcb2v" path="res://Scenes/Enemies/enemy_template.tscn" id="1_2e6bb"]
 [ext_resource type="Script" uid="uid://dlhqcg324wni4" path="res://Scripts/Enemy AI/met.gd" id="2_1pujd"]
@@ -18,14 +18,6 @@ region = Rect2(0, 200, 200, 200)
 atlas = ExtResource("2_4j6d0")
 region = Rect2(0, 400, 200, 200)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rk256"]
-atlas = ExtResource("2_4j6d0")
-region = Rect2(0, 400, 200, 200)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_c5a7r"]
-atlas = ExtResource("2_4j6d0")
-region = Rect2(0, 600, 200, 200)
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_2e6bb"]
 animations = [{
 "frames": [{
@@ -40,30 +32,19 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_4ljox")
 }, {
-"duration": 1.0,
+"duration": 8.0,
 "texture": SubResource("AtlasTexture_0nwh7")
 }],
 "loop": false,
 "name": &"Lift",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_rk256")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_c5a7r")
-}],
-"loop": true,
-"name": &"Run",
-"speed": 10.0
+"speed": 8.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4j6d0"]
 size = Vector2(14, 14)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ljox"]
-radius = 86.0
+radius = 66.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rk256"]
 size = Vector2(26, 16)
@@ -78,6 +59,10 @@ script = ExtResource("2_1pujd")
 sprite_frames = SubResource("SpriteFrames_2e6bb")
 animation = &"Lift"
 autoplay = "Idle"
+
+[node name="Hurtbox" parent="Pattern" index="3"]
+collision_layer = 16
+collision_mask = 18
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Pattern/Hurtbox" index="0"]
 position = Vector2(0, -2)
@@ -98,7 +83,14 @@ position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_rk256")
 
 [node name="RayCast2D" type="RayCast2D" parent="Pattern" index="8"]
-target_position = Vector2(0, 8)
+target_position = Vector2(-86, 0)
+collision_mask = 16
+hit_from_inside = true
+
+[node name="RayCast2D2" type="RayCast2D" parent="Pattern" index="9"]
+target_position = Vector2(86, 0)
+collision_mask = 16
+hit_from_inside = true
 
 [connection signal="death" from="." to="Pattern" method="_on_met_death"]
 [connection signal="body_entered" from="Pattern/Detection Area" to="Pattern" method="_on_detection_area_body_entered"]
